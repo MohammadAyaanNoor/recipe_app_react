@@ -5,6 +5,8 @@ import Recipes from '../components/Recipes'
 import Contact from '../components/Contact'
 import About from '../components/About'
 import Layout from '../components/Layout'
+import Details from '../components/Details'
+import Update from '../components/Update'
 
 const MainRoutes = () => {
   return (
@@ -14,6 +16,8 @@ const MainRoutes = () => {
         <Route path='/recipes' element={<Recipes/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
+        <Route path='/details/:id' element={<Details/>}/>
+        <Route path='/update-recipe/:id' element={<Update/>}/>
       </Routes>
   )
 }

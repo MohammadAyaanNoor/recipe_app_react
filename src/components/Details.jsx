@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { recipecontext } from '../contexts/RecipeContext';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Details = () => {
     // const recipe = {
@@ -15,16 +16,18 @@ const Details = () => {
     //     instructions:
     //         "Combine the ground meat, bread crumbs, egg, parsley, salt and pepper in a bowl. Mix well and form into tiny meat balls. Bake on a cookie sheet for 30 minutes at 350F. Meanwhile, bring broth to a boil and add spinach. Cover and boil for 5 minutes. Add the meatballs to the hot broth, bring to a simmer. Stir in the cheese and serve immediately. Rita in Scottsdale 01/02/92 01:41 am",
     // };
+    const dispatch = useDispatch()
+
     const {id} = useParams()
     const navigate = useNavigate()
-    const [recipes,setrecipes]= useContext(recipecontext)
-    const recipe = recipes.find((r)=>r.id == id)
-    const DeleteHandler = ()=>{
-        setrecipes(recipes.filter((r)=>r.id != id))
-        localStorage.setItem("recipes",JSON.stringify(recipes.filter((r)=>r.id != id)))
-        toast.success("Recipe deleted successfully")
-        navigate('/recipes')
-    }
+    const {recipes}= useSelector((state)=>state.recipeReducer)
+    const recipe = recipes && recipes.find((r)=>r.id == id)
+    // const DeleteHandler = ()=>{
+    //     setrecipes(recipes.filter((r)=>r.id != id))
+    //     localStorage.setItem("recipes",JSON.stringify(recipes.filter((r)=>r.id != id)))
+    //     toast.success("Recipe deleted successfully")
+    //     navigate('/recipes')
+    // }
     return recipe ? (
         <div className="w-[80%] m-auto p-5">
             <Link to="/recipes" className="text-3xl ri-arrow-left-line"></Link>
@@ -45,7 +48,7 @@ const Details = () => {
                             Update
                         </Link>
                         <button
-                            onClick={DeleteHandler}
+                            
                             className="text-red-400 border-red-400 border py-2 px-5"
                         >
                             Delete

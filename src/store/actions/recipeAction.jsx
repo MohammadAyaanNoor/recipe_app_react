@@ -3,9 +3,9 @@ import { load } from "../reducers/recipeReducer";
 
 export const asyncload =()=>async(dispatch,getState)=>{
     try {
-        setTimeout(()=>{
+        // setTimeout(()=>{
             dispatch(load(JSON.parse(localStorage.getItem("recipes"))))
-        },1000)
+        // },1000)
     } catch (error) {
         console.log(error)
     }
@@ -13,10 +13,10 @@ export const asyncload =()=>async(dispatch,getState)=>{
 
 export const asyncadd = (recipe)=>async(dispatch,getState)=>{
     try {
-        setTimeout(()=>{
+        // setTimeout(()=>{
             const {recipes} = getState().recipeReducer
             localStorage.setItem("recipe",JSON.stringify([...recipes,recipe]))
-        },2000)
+        // },2000)
     } catch (error) {
         toast.error(error)
     }

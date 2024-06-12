@@ -1,11 +1,6 @@
-import React, { useContext, useEffect } from 'react'
 import Card from './Card';
 import { useLocation } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-import { recipecontext } from '../contexts/RecipeContext';
-import { useDispatch, useSelector } from 'react-redux';
-import { asyncload } from '../store/actions/recipeAction';
-import { load } from '../store/reducers/recipeReducer';
+import {  useSelector } from 'react-redux';
 import recipeReducer from '../store/reducers/recipeReducer';
 
 const Recipes = () => {

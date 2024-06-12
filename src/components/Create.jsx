@@ -1,9 +1,8 @@
-import React, { useContext, useState } from 'react'
-import { recipecontext } from '../contexts/RecipeContext'
+import React, {  useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { toast } from 'react-toastify'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { asyncadd } from '../store/actions/recipeAction'
 
 
@@ -18,7 +17,7 @@ const Create = () => {
     const dispatch = useDispatch()
 
     const [imageURL, setimageURL] = useState("")
-    const [recipename, setrecipename] = useState("kjhkjhkh")
+    const [recipename, setrecipename] = useState("")
     const [description, setdescription] = useState("")
     const [ingredients, setingredients] = useState("");
     const [instructions, setinstructions] = useState("");

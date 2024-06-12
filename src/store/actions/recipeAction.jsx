@@ -5,7 +5,7 @@ import { load } from "../reducers/recipeReducer";
 export const asyncload =()=>async(dispatch,getState)=>{
     try {
         setTimeout(()=>{
-            dispatch(load(JSON.parse(localStorage.getItem("recipes"))))
+            dispatch(load(JSON.parse(localStorage.getItem("recipes")) || []))
         },1000)
     } catch (error) {
         console.log(error)

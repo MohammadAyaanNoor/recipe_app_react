@@ -6,11 +6,12 @@ import { recipecontext } from '../contexts/RecipeContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncload } from '../store/actions/recipeAction';
 import { load } from '../store/reducers/recipeReducer';
+import recipeReducer from '../store/reducers/recipeReducer';
 
 const Recipes = () => {
   const {pathname}=useLocation()
   const {recipes} = useSelector((state)=>state.recipeReducer)
-  console.log(recipes)
+  
 
 
   return (
@@ -27,7 +28,7 @@ const Recipes = () => {
             )}
            
             <div className="recipe-cards mt-[5%]  flex flex-wrap p-5">
-                {recipes.length > 0 ? (
+                { recipes && recipes.length > 0 ? (
                     recipes.map((r) => <Card key={r.id} recipe={r} />)
                 ) : (
                     <h1 className="w-full text-green-600 text-3xl font-extrabold text-center mt-10">

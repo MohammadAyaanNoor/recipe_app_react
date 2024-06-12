@@ -2,9 +2,12 @@ import React, { useContext, useState } from 'react'
 import { recipecontext } from '../contexts/RecipeContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux';
+import { asyncUpdate } from '../store/actions/recipeAction';
 
 const Update = () => {
-    const [recipes,setrecipes]= useContext(recipecontext)
+    const dispatch = useDispatch()
+    const {recipes} = useSelector((state)=>state.recipeReducer)
     const {id} = useParams()
     const navigate = useNavigate()
     const recipe = recipes && recipes.find((r)=> r.id === id)
@@ -23,11 +26,7 @@ const Update = () => {
             ingredients,
             instructions,
         };
-        const copyrecipes= [...recipes]
-        const index = copyrecipes.findIndex((r)=>r.id == id)
-        copyrecipes[index]= updatedRecipe
-        setrecipes(copyrecipes)
-        localStorage.setItem('recips',JSON.stringify(copyrecipes))
+        dispatch(asyncUpdate(updatedRecipe))
         toast.success("recipe updated successfully")
         navigate('/recipes')
     }

@@ -3,6 +3,9 @@ import { recipecontext } from '../contexts/RecipeContext'
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
+import { asyncadd } from '../store/actions/recipeAction'
+
 
 
 const Create = () => {
@@ -12,9 +15,10 @@ const Create = () => {
     //     formState: { errors },
     //   } = useForm();
     const navigate = useNavigate()
-    const [recipes,setrecipes] = useContext(recipecontext)
+    const dispatch = useDispatch()
+
     const [imageURL, setimageURL] = useState("")
-    const [recipename, setrecipename] = useState("")
+    const [recipename, setrecipename] = useState("kjhkjhkh")
     const [description, setdescription] = useState("")
     const [ingredients, setingredients] = useState("");
     const [instructions, setinstructions] = useState("");
@@ -28,12 +32,11 @@ const Create = () => {
             ingredients,
             instructions
         }
-        setrecipes([...recipes,newrecipe])
-        localStorage.setItem("recipes",JSON.stringify([...recipes,newrecipe]))
+       dispatch(asyncadd(newrecipe))
         toast.success("recipe created successfully!!!")
         navigate('/recipes')
     }
-    console.log(recipes)
+
     
 
 

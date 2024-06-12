@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { recipecontext } from '../contexts/RecipeContext';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
+import { asyncRemove } from '../store/actions/recipeAction';
 
 const Details = () => {
     // const recipe = {
@@ -22,12 +23,11 @@ const Details = () => {
     const navigate = useNavigate()
     const {recipes}= useSelector((state)=>state.recipeReducer)
     const recipe = recipes && recipes.find((r)=>r.id == id)
-    // const DeleteHandler = ()=>{
-    //     setrecipes(recipes.filter((r)=>r.id != id))
-    //     localStorage.setItem("recipes",JSON.stringify(recipes.filter((r)=>r.id != id)))
-    //     toast.success("Recipe deleted successfully")
-    //     navigate('/recipes')
-    // }
+    const DeleteHandler = ()=>{
+        dispatch(asyncRemove(id))
+        toast.success("Recipe deleted successfully")
+        navigate('/recipes')
+    }
     return recipe ? (
         <div className="w-[80%] m-auto p-5">
             <Link to="/recipes" className="text-3xl ri-arrow-left-line"></Link>
@@ -48,7 +48,7 @@ const Details = () => {
                             Update
                         </Link>
                         <button
-                            
+                            onClick={DeleteHandler}
                             className="text-red-400 border-red-400 border py-2 px-5"
                         >
                             Delete

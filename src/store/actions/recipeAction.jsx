@@ -14,11 +14,11 @@ export const asyncload =()=>async(dispatch,getState)=>{
 
 export const asyncadd = (recipe)=>async(dispatch,getState)=>{
     try {
-        // setTimeout(()=>{
+        setTimeout(()=>{
             const {recipes} = getState().recipeReducer
             localStorage.setItem("recipes", JSON.stringify([...recipes, recipe]));
             dispatch(asyncload());
-        // },2000)
+        },2000)
     } catch (error) {
         toast.error(error)
     }
